@@ -1,6 +1,6 @@
 {
   "name": "partner-transform",
-  "version": "0.0.1-development",
+  "version": "0.0.4-development",
   "description": "A small library to create middleware applications",
   "main": "./lib/index.js",
   "files": [

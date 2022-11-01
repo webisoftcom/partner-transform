@@ -2,7 +2,7 @@ import convert from 'xml-js'
 import dotProp from 'dot-prop-immutable'
 import { deepCopy } from './utils'
 
-class DataMapperBase {
+export class DataMapperBase {
 	constructor(data) {
 		this.data = data
 		this.endData = {}
@@ -30,17 +30,17 @@ class DataMapperBase {
 				if (k.indexOf('_attributes') > -1) {
 					obj[newKey] = eachRecursive(obj[newKey], false);
 				} else if (k.indexOf('_text') > -1) {
-					obj[k] = dotProp.get(this.data, obj[k]);
+					obj[k] = dotProp.get(this.data, obj[k])
 				} else if (typeof obj[newKey] == 'object' && obj[newKey] !== null) {
-					obj[newKey] = eachRecursive(obj[newKey]);
+					obj[newKey] = eachRecursive(obj[newKey])
 				} else {
 					let value = obj[newKey]
 					if (typeof value === 'function') {
 						obj[newKey] = value.call(this)
-						obj[newKey] = eachRecursive(obj[newKey]);
+						obj[newKey] = eachRecursive(obj[newKey])
 					} else if (obj[newKey] !== undefined) {
 						let v = obj[newKey]
-						obj[newKey] = dotProp.get(this.data, v, v);
+						obj[newKey] = dotProp.get(this.data, v, v)
 					}
 				}
 			}
@@ -62,7 +62,7 @@ class DataMapperBase {
 			spaces: 4,
 			elementNameFn: listHandling,
 		}
-		return convert.js2xml(this.endData, options);
+		return convert.js2xml(this.endData, options)
 	}
 
 	toJson() {
@@ -84,4 +84,4 @@ class DataMapperBase {
 	}
 }
 
-export const DataMapper = DataMapperBase
+module.exports = DataMapperBase
