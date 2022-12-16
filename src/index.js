@@ -38,7 +38,7 @@ export class DataMapperBase {
 					if (typeof value === 'function') {
 						obj[newKey] = value.call(this)
 						obj[newKey] = eachRecursive(obj[newKey])
-					} else if (obj[newKey] !== undefined) {
+					} else if (obj[newKey] !== undefined && obj[newKey] !== null) {
 						let v = obj[newKey]
 						obj[newKey] = dotProp.get(this.data, v, v)
 					}
